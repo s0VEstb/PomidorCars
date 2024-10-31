@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'django_filters',
     'cars',
     'rest_framework',
@@ -78,6 +79,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -119,3 +125,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD_ENABLED = True
+
+SOCIAL_GITHUB_KEY = config('SOCIAL_GITHUB_KEY')
+SOCIAL_GITHUB_SECRET = config('SOCIAL_GITHUB_SECRET')
+SOCIAL_AUTH_REDIRECT_URI = 'http://127.0.0.1:8000/complete/github/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
