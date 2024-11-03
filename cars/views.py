@@ -19,7 +19,6 @@ class CarListAPIView(generics.ListCreateAPIView):
     ordering_fields = ['name', 'price', 'mark__name']
 
 
-
 class CarDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CarSerializer
     queryset = CarModel.objects.all()

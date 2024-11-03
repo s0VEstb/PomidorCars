@@ -5,11 +5,11 @@ from .models import CarModel, MarkModel
 class MarkSerializer(serializers.ModelSerializer):
     class Meta:
         model = MarkModel
-        fields = ('name',)
+        fields = ('id', 'name')
 
 
 class CarSerializer(serializers.ModelSerializer):
-    mark = MarkSerializer()
+    mark = MarkSerializer
 
     class Meta:
         model = CarModel

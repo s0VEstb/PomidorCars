@@ -2,10 +2,13 @@ from rest_framework.test import APITestCase
 from django.urls import reverse
 from cars.models import CarModel, MarkModel
 from cars.serializers import CarSerializer
+from django.contrib.auth.models import User
+import json
 
 
-class BooksAPITestCase(APITestCase):
+class CarsAPITestCase(APITestCase):
     def setUp(self):
+        self.user = User.objects.create(username='test_user')
         self.mark1 = MarkModel.objects.create(name='KIA')
         self.mark2 = MarkModel.objects.create(name='TOYOTA')
 
@@ -41,5 +44,42 @@ class BooksAPITestCase(APITestCase):
         self.assertEquals(serializer_data, response.data)
         self.assertEquals(response.status_code, 200)
 
+    def test_create(self):
+        self.assertEquals(3, CarModel.objects.all().count())
+        url = reverse('car_list')
+        data = {
+            "name": "KIA K3",
+            "price": 1000,
+            "mark": self.mark1.id
+        }
+        self.client.force_login(self.user)
+        response = self.client.post(url, data=data, format='json')
+        self.assertEquals(response.status_code, 201)
+        self.assertEquals(4, CarModel.objects.all().count())
 
+    def test_put(self):
+        url = reverse('car_detail', args=(self.car_1.id,))
+        data = {
+            "name": "KIA K5",
+            "price": 9000,
+            "mark": self.mark1.id
+        }
+        self.client.force_login(self.user)
+        response = self.client.put(url, data=data, format='json')
+        self.assertEquals(response.status_code, 200)
+        self.car_1.refresh_from_db()
+        self.assertEquals(9000, self.car_1.price)
+
+    def test_delete(self):
+        url = reverse('car_detail', args=(self.car_1.id,))
+        self.client.force_login(self.user)
+        response = self.client.delete(url)
+        self.assertEquals(response.status_code, 204)
+        self.assertEquals(CarModel.objects.all().count(), 2)
     
+    def test_detail(self):
+        url = reverse('car_detail', args=(self.car_1.id,))
+        response = self.client.get(url)
+        serializer_data = CarSerializer(self.car_1).data
+        self.assertEquals(serializer_data, response.data)
+        self.assertEquals(response.status_code, 200)
