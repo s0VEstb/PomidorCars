@@ -60,7 +60,7 @@ class CarsAPITestCase(APITestCase):
     def test_put(self):
         url = reverse('car_detail', args=(self.car_1.id,))
         data = {
-            "name": "KIA K5",
+            "name": self.car_1.name,
             "price": 9000,
             "mark": self.mark1.id
         }

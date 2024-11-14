@@ -34,4 +34,3 @@ class OauthAPIGithubView(APIView):
             f"scope=user"
         )
         return Response({"auth_url": github_auth_url})
-
