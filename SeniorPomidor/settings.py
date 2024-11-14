@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'SeniorPomidor.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 if config('PRODUCTION') == "True":
-    DEBUG = False
+    DEBUG = True
 
     DATABASES = {
         'default': {

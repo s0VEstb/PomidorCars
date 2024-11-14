@@ -12,6 +12,7 @@ class CarModel(models.Model):
     price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    year = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
