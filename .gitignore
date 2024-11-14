@@ -5,3 +5,5 @@ __pycache__
 .env/
 .idea
 .env
+**/migrations/*
+!**/migrations/__init__.py

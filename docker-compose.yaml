@@ -17,6 +17,7 @@ services:
     volumes:
       - static_volume:/usr/src/app/back_static/
       - media_volume:/usr/src/app/back_media/
+      - ./:/usr/src/app/
 
   db:
     image: postgres:alpine
