@@ -10,6 +10,7 @@ class CarModel(models.Model):
     mark = models.ForeignKey('MarkModel', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.id} - {self.name}"
