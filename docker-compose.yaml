@@ -63,3 +63,5 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+  certbot_certs:
+  certbot_certs_data:
