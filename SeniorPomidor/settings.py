@@ -98,6 +98,12 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.pomidor.pp.ua',
+]
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
