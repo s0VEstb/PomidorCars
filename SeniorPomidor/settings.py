@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django_filters',
     'cars',
     'rest_framework',
+    'main_page',
 ]
 
 MIDDLEWARE = [
